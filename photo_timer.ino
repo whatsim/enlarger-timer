@@ -22,8 +22,6 @@
 #define HT16K33_BLINK_1HZ 2          ///< I2C value for 1 Hz blink
 #define HT16K33_BLINK_HALFHZ 3       ///< I2C value for 0.5 Hz blink
 
-
-
 static const uint8_t numbertable[] = {
     0x3F, /* 0 */
     0x06, /* 1 */
@@ -74,6 +72,7 @@ volatile uint8_t encoderDelta = 0;
 
 unsigned long startTime = 0;
 float duration = 5;
+float durationStep = 0.25;
 
 mode currentMode = setting;
 
@@ -185,17 +184,16 @@ void writeTimeToBuffer(long t){
   } else {
     displaybuffer[1] = 0;
   }
+  
   if(hundredSeconds % 10 != 0){
     writeDigitToBuffer(0, hundredSeconds % 10,false);
   } else {
     displaybuffer[0] = 0;
   }
-  
 }
 
 
 void setFunction(){
-
   // toggle preview mode
   int previewButtonEdge = updateButton(&previewButton);
   if(previewButtonEdge == LOW){
@@ -214,17 +212,16 @@ void setFunction(){
       changeMode(timerRunning);
     }
   }
+  
   if(timerButton.state == HIGH){
     hasToggledDisplayThisPress = false;
   }
   
-
   // change time
-  
   if(encoderDelta == DIR_CW){
-    duration -= 0.5;
+    duration -= durationStep;
   } else if(encoderDelta == DIR_CCW){
-    duration += 0.5;
+    duration += durationStep;
   }
   if(duration <= 0){
     duration = 0;
@@ -241,7 +238,6 @@ void setFunction(){
 
   encoderDelta = 0;
   // display time
-//  Serial.println(duration * 1000);
   writeTimeToBuffer(long(duration * 1000));
 }
 
@@ -317,10 +313,8 @@ void initDisplay(){
   Wire.beginTransmission(DISPLAY_ADDRESS);
   Wire.write(HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON);
   Wire.endTransmission();
-  
-  
-  
 }
+
 void toggleDisplay(){
   if(displayOn){
     Wire.beginTransmission(DISPLAY_ADDRESS);
@@ -333,6 +327,7 @@ void toggleDisplay(){
   }
   displayOn = !displayOn;
 }
+
 void rotInterrupt(){
   encoderDelta = encoder.read();
 }
