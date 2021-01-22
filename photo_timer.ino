@@ -260,7 +260,7 @@ void runFunction(){
     changeMode(setting); 
   }
 
-  long modifiedDuration = duration;
+  float modifiedDuration = duration;
   if(currentMode == running){
     modifiedDuration += preRunDuration;
   } else if (currentMode == timerRunning){
