@@ -172,23 +172,34 @@ int updateButton(ButtonState *state){
 
 void writeTimeToBuffer(long t){
   int tenthSeconds  = floor(t / 100);
+  int hundredthSeconds  = floor(t / 10);
   int seconds = floor(t / 1000);
   int tenSeconds = floor(t / 10000);
   int hundredSeconds = floor(t / 100000);
 
-  writeDigitToBuffer(4, tenthSeconds % 10, false);
-  writeDigitToBuffer(3, seconds % 10, true);
-  displaybuffer[2] = 0;
-  if(tenSeconds % 10 != 0 || hundredSeconds % 10 != 0){
-    writeDigitToBuffer(1, tenSeconds % 10,false);
-  } else {
-    displaybuffer[1] = 0;
-  }
+
+  
   
   if(hundredSeconds % 10 != 0){
     writeDigitToBuffer(0, hundredSeconds % 10,false);
+    writeDigitToBuffer(4, tenthSeconds % 10, false);
+    writeDigitToBuffer(3, seconds % 10, true);
+    displaybuffer[2] = 0;
+    if(tenSeconds % 10 != 0 || hundredSeconds % 10 != 0){
+      writeDigitToBuffer(1, tenSeconds % 10,false);
+    } else {
+      displaybuffer[1] = 0;
+    }
   } else {
-    displaybuffer[0] = 0;
+    if(tenSeconds % 10 != 0){
+      writeDigitToBuffer(0, tenSeconds % 10,false);
+    } else {
+      displaybuffer[0] = 0;
+    }
+    displaybuffer[2] = 0;
+    writeDigitToBuffer(1, seconds % 10, true);
+    writeDigitToBuffer(3, tenthSeconds % 10, false);
+    writeDigitToBuffer(4, hundredthSeconds % 10, false);
   }
 }
 
