@@ -181,6 +181,7 @@ void writeTimeToBuffer(long t){
   
   
   if(hundredSeconds % 10 != 0){
+    // if hundred digit, shift the diplay right
     writeDigitToBuffer(0, hundredSeconds % 10,false);
     writeDigitToBuffer(4, tenthSeconds % 10, false);
     writeDigitToBuffer(3, seconds % 10, true);
@@ -191,6 +192,7 @@ void writeTimeToBuffer(long t){
       displaybuffer[1] = 0;
     }
   } else {
+    // if not hundred digit, show to hundredth place
     if(tenSeconds % 10 != 0){
       writeDigitToBuffer(0, tenSeconds % 10,false);
     } else {
