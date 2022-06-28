@@ -231,11 +231,7 @@ void setFunction(){
   }
   
   // change time
-  if(encoderDelta == DIR_CW){
-    duration -= durationStep;
-  } else if(encoderDelta == DIR_CCW){
-    duration += durationStep;
-  }
+  
   if(duration <= 0){
     duration = 0;
   }
@@ -343,4 +339,9 @@ void toggleDisplay(){
 
 void rotInterrupt(){
   encoderDelta = encoder.read();
+  if(encoderDelta == DIR_CW){
+    duration -= durationStep;
+  } else if(encoderDelta == DIR_CCW){
+    duration += durationStep;
+  }
 }
