@@ -1,6 +1,6 @@
 # enlarger timer
 
-This is an arduino sketch (and rough description of the build) for making an photo enlarger controller. In order to make accurate and repeatable prints, enlargers are often pared with timers (like the [one I learned on](https://www.freestylephoto.biz/300718-GraLab-300-Darkroom-Timer-(GR300))). I came into an enlarger that didn't come with a timer, and rather than sourcing one decided to build my own.
+This is an arduino sketch (and rough description of the build) for making an photo enlarger controller. In order to make accurate and repeatable prints, enlargers are often paired with timers (like the [one I learned on](https://www.freestylephoto.biz/300718-GraLab-300-Darkroom-Timer-(GR300))). I came into an enlarger that didn't come with a timer, and rather than sourcing one decided to build my own.
 
 The key features are:
 
@@ -25,7 +25,7 @@ While this design relies on the internal clock of the arduino for timing and is 
 
 ## Dependencies
 
-once you have the sketch open in the [Arduino IDE](https://www.arduino.cc/) you need to install MD_REncoder via `Tools > Manage Library` in the Arduino menu. You can search for 'MD_REncoder' and select install. I am running version 1.0.1. The sketch also requires Wire which should come with the Arduino IDE.
+once you have the sketch open in the [Arduino IDE](https://www.arduino.cc/) you need to install `MD_REncoder` via `Tools > Manage Library` in the Arduino menu. You can search for `MD_REncoder` and select install. I am running version 1.0.1. The sketch also requires Wire which should come with the Arduino IDE.
 
 ## pinout
 
