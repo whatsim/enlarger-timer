@@ -91,7 +91,7 @@ void setup() {
  
   pinMode(POWER_PIN, OUTPUT);
 
-  Serial.begin(9600);
+//  Serial.begin(9600);
   Wire.begin();
 
   changeMode(currentMode);
